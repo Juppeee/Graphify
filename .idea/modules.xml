@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DataPlot.iml" filepath="$PROJECT_DIR$/DataPlot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Graphify.iml" filepath="$PROJECT_DIR$/Graphify.iml" />
     </modules>
   </component>
 </project>
