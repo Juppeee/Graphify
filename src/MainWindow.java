@@ -153,9 +153,9 @@ public class MainWindow implements Runnable {
         yArea = new JTextArea("");
 
         xArea.setColumns(1);
-        xArea.setPreferredSize(new Dimension(40, 15));
+        xArea.setPreferredSize(new Dimension(50, 15));
         yArea.setColumns(1);
-        yArea.setPreferredSize(new Dimension(40, 15));
+        yArea.setPreferredSize(new Dimension(50, 15));
 
         subGrid.gridx = 0;
         for (int i = 0; i < axLabels.length; i++) {
@@ -318,6 +318,17 @@ public class MainWindow implements Runnable {
                     if (line.split(",").length != 2)
                         continue;
                     splitLine = line.split(",");
+                    switch(splitLine[0]) {
+                        case "H":
+                            nameArea.setText(splitLine[1]);
+                            break;
+                        case "X":
+                            xNameArea.setText(splitLine[1]);
+                            break;
+                        case "Y":
+                            yNameArea.setText(splitLine[1]);
+                            break;
+                    }
                     if (!isDouble(splitLine[0]) || !isDouble(splitLine[1]))
                         continue;
                     for (int i = 0; i < 2; i++)
@@ -342,7 +353,7 @@ public class MainWindow implements Runnable {
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setLayout(new GridBagLayout());
         // icon image is still a  placeholder (how did it turn that awful?!)
-        icon = new ImageIcon("resource/icon.png");
+        icon = new ImageIcon("resource/icon_v2.png");
         mainFrame.setIconImage(icon.getImage());
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
