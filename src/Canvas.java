@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
 public class Canvas extends JPanel {
 
     public static JFrame frame;
+
+    private BufferedImage img;
 
     public static final int width = 500;
     public static final int height = 500;
@@ -26,6 +30,7 @@ public class Canvas extends JPanel {
 
     public Canvas () {
         setPreferredSize(new Dimension(width, height));
+        img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
     private void drawing(Graphics g) {
@@ -63,6 +68,7 @@ public class Canvas extends JPanel {
         g2d.drawLine(leftX, downY, rightX, downY); //x-axis
         g2d.drawString(data.getName(), width / 2, pad / 2);
         g2d.drawString(data.getXname(), width / 2, height - pad / 2);
+        drawVertical(g2d, pad / 2, height / 2, data.getYname());
 
 
         // Draw axis zero markers in case of mixed positive and negative values
@@ -102,7 +108,25 @@ public class Canvas extends JPanel {
         }
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawing(g);
+    }
+
     // Private methods used by draw
+
+    private void drawVertical(Graphics g, double x, double y, String text) {
+        double angle = 1.5*Math.PI;
+        Graphics2D g2d = (Graphics2D)g;
+        AffineTransform affineFont = new AffineTransform();
+        Font origFont = g2d.getFont();
+        affineFont.rotate(angle);
+        Font newFont = origFont.deriveFont(affineFont);
+        g2d.setFont(newFont);
+        g2d.drawString(text, (int)x, (int)y);
+        g2d.setFont(origFont);
+    }
 
     private DataPoint getAnchorPoint() {
         // TODO improve anchor point lookup method ?
@@ -113,7 +137,6 @@ public class Canvas extends JPanel {
         if (data.getMinY() > 0 || data.getMaxY() < 0) {
             val.setY(data.getMinY()); // FIXME
         }
-        Debug.print(val.getY());
         return val;
     }
 
@@ -141,12 +164,6 @@ public class Canvas extends JPanel {
         return (int) (pad + yScale * (y - data.getMaxY()));
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        drawing(g);
-    }
-
     private static void initMenuBar() {
         menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
@@ -156,6 +173,11 @@ public class Canvas extends JPanel {
         fileSave = new JMenuItem("Save");
         menuFile.add(fileSave);
         menuBar.add(menuFile);
+    }
+
+    public static void save() {
+
+        //TODO
     }
 
     public static void execute(Data input) {
