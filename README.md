@@ -1,10 +1,8 @@
 /////       About Graphify     //////
 
-Graphify (working title) is a desktop application for creating 2D-graphs out of user inputted data. The goal of the app 
-is to be functional, intuitive and stable.
+Graphify (working title) is a desktop application for creating 2D-graphs out of user inputted data. The goal of the app is to be functioning, intuitive and stable.
 
-Graphify is my first free-standing Java app. Thus the project is as much about me exploring the possibilities of Java
-as it is about creating a functioning little desktop app. Feedback on the project is appreciated,
+Graphify is my first free-standing Java app. Thus the project is as much about me exploring the possibilities of Java as it is about creating a functioning little desktop app. Feedback on the project is appreciated,
 
 
 /////       Feature list       /////
